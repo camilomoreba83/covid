@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registrar">
+
+    <Button
+        android:id="@+id/btnRegistro"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#F44336"
+        android:text="Registrarse"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txtContraseñaReg1"
+        app:layout_constraintStart_toStartOf="@+id/txtContraseñaReg1" />
+
+    <EditText
+        android:id="@+id/txtNombres"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:ems="10"
+        android:hint="Nombres"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <EditText
+        android:id="@+id/txtApellidos"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Apellidos"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtNombres"
+        app:layout_constraintStart_toStartOf="@+id/txtNombres"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombres" />
+
+    <EditText
+        android:id="@+id/txtEmailReg"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <EditText
+        android:id="@+id/txtContraseñaReg"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/txtEmailReg"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailReg" />
+
+    <EditText
+        android:id="@+id/txtContraseñaReg1"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Confirmar Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/txtEmailReg"
+        app:layout_constraintTop_toBottomOf="@+id/txtContraseñaReg" />
+
+    <EditText
+        android:id="@+id/txtDocIdentidad"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Documento de Identidad"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtApellidos"
+        app:layout_constraintStart_toStartOf="@+id/txtApellidos"
+        app:layout_constraintTop_toBottomOf="@+id/txtApellidos" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="58dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/__logo_web_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="300dp"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/txtRegistrarse2"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegistrarse2">
+
+        <RadioButton
+            android:id="@+id/rdbProfesor"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Profesor" />
+
+        <RadioButton
+            android:id="@+id/rdbEstudiante"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Estudiante" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtDocIdentidad"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegistrarse4" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="¿Tienes una cuenta?"
+        app:layout_constraintStart_toStartOf="@+id/btnRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
+
+    <TextView
+        android:id="@+id/txtIniciarSesionReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Iniciar Sesión"
+        android:textColor="#F44336"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
+
+    <TextView
+        android:id="@+id/txtRegistrarse2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="¿Quien eres?"
+        android:textColor="#F44336"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtDocIdentidad"
+        app:layout_constraintTop_toBottomOf="@+id/txtDocIdentidad" />
+
+    <TextView
+        android:id="@+id/txtRegistrarse4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Seleccionar un programa"
+        android:textColor="#F44336"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abeezee"
+        android:text="Registro"
+        android:textAllCaps="false"
+        android:textColor="#090909"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
