@@ -26,9 +26,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "Debes ingresar tu email y contraseña", Toast.LENGTH_SHORT).show();
                 }else if ((email.contentEquals(email1))&&(pass.contentEquals(pass1))){
                     Toast.makeText(getApplicationContext(), "Bienvenid@s!!!", Toast.LENGTH_SHORT).show();
-                    /*Intent intent= new Intent(MainActivity.this, Registrar.class);
+
+                    //Setear los inputs
+                    txtContraseña.setText(null);
+                    txtEmail.setText(null);
+
+                    Intent intent= new Intent(MainActivity.this, NavegacionMenuActivity.class);
                     intent.putExtra("email",email);
-                    startActivity(intent);*/ //Aqui enviar a la actividad HOME
+                    startActivity(intent); //Aqui enviar a la actividad HOME
                 }else{
                     Toast.makeText(getApplicationContext(), "Email o contraseña incorrecta", Toast.LENGTH_SHORT).show();
                 }

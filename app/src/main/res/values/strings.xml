@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Covid_App</string>
+    <string name="title_activity_navegacion_menu">NavegacionMenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Nombre de usuario</string>
+    <string name="nav_header_subtitle">email@usuario.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_cursos">Cursos</string>
+    <string name="menu_salir">Salir</string>
+    <string name="saliendo">Saliendo...</string>
+    <string name="mis_cursos">Mis Cursos</string>
+    <string name="icono_del_curso">icono del curso</string>
+    <string name="curso_1">Curso1</string>
+    <string name="curso_2">Curso2</string>
+    <string name="curso_3">Curso3</string>
+
+    <string name="estadisticas_diagnostico">Estadisticas Diagnostico</string>
+    <string name="reporte_diario">Reporte Diario</string>
+    <string name="lista_estudiantes">Lista Estudiantes</string>
+    <string name="imagen_de_usuario">imagen de usuario</string>
+    <string name="habilitados">Habilitados</string>
+    <string name="no_habilitados">No Habilitados</string>
+    <string name="sin_registro">Sin Registro</string>
 </resources>
