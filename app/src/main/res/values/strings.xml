@@ -25,4 +25,9 @@
     <string name="habilitados">Habilitados</string>
     <string name="no_habilitados">No Habilitados</string>
     <string name="sin_registro">Sin Registro</string>
+    <string name="programa_estudiante">Programa estudiante</string>
+    <string name="realizar_registro">Realizar Registro</string>
+    <string name="icono_redistro_diagnostico">Icono redistro diagnostico</string>
+    <string name="estado_del_estudiante">Estado del estudiante</string>
+    <string name="nombre_completo_estudiante">Nombre completo estudiante</string>
 </resources>

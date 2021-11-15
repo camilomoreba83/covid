@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Ingresa tus datos", Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(MainActivity.this, Registrar.class);
                 startActivity(intent);
+                finish();
             }
         }
     };
@@ -67,5 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(getApplicationContext(), "Bienvenid@s todos", Toast.LENGTH_SHORT).show();
         //Intent intent= new Intent(MainActivity.this, Registro.class);
         //startActivity(intent);
+    }
+
+    @Override
+    public void finish() {
+        //super.finish();
     }
 }

@@ -53,6 +53,7 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(), "Hola nuevamente!!!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Registrar.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }/*else if (view.getId()==R.id.button1){
                 String text2="";
                 if (rdbEstudiante.isChecked()==true){
@@ -96,5 +97,10 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
 
+    }
+
+    @Override
+    public void finish() {
+        //super.finish();
     }
 }

@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 
-import co.edu.unab.covid_app.entities.DiagnosticoUser;
+import co.edu.unab.covid_app.entities.Diagnostico;
 import co.edu.unab.covid_app.helpers.DiagnosticoAdapter;
 
 public class ReportesActivity extends AppCompatActivity {
@@ -54,14 +54,16 @@ public class ReportesActivity extends AppCompatActivity {
         );
     }
 
-    private ArrayList<DiagnosticoUser> getArrayItems(){
-        ArrayList<DiagnosticoUser> listItems = new ArrayList<>();
-        listItems.add(new DiagnosticoUser(1,"Carlos Andres","Sin Diagnostico","noi_mage"));
-        listItems.add(new DiagnosticoUser(2,"Sara Estrella","Sin Diagnostico","noi_mage"));
-        listItems.add(new DiagnosticoUser(3,"Ximena Hernandez","No habilitado","noi_mage"));
-        listItems.add(new DiagnosticoUser(4,"Santiago Salcedo","No habilitado","noi_mage"));
-        listItems.add(new DiagnosticoUser(5,"Paula Muñoz","Habilitado","noi_mage"));
-        listItems.add(new DiagnosticoUser(6,"Daniel Rivas","Habilitado","noi_mage"));
+    private ArrayList<Diagnostico> getArrayItems(){
+        ArrayList<Diagnostico> listItems = new ArrayList<>();
+
+        listItems.add(new Diagnostico(1,"Carlos Andres","Hernandez", "Ingenieria", "1234567890","carlos@andres.com","noi_mage","15/11/2021","Sin Diagnostico"));
+        listItems.add(new Diagnostico(2,"Maria Camila","Molina", "Ingenieria", "1234567890","maria@camila.com","noi_mage","15/11/2021","Sin Diagnostico"));
+        listItems.add(new Diagnostico(3,"Paula Muñoz","Sanchez", "Ingenieria", "1234567890","paula@muñoz.com","noi_mage","15/11/2021","No habilitado"));
+        listItems.add(new Diagnostico(4,"Mario Andres","Solarte", "Ingenieria", "1234567890","mario@andres.com","noi_mage","15/11/2021","No habilitado"));
+        listItems.add(new Diagnostico(3,"Cesar Armando","Belarcazar", "Ingenieria", "1234567890","cesar@armando.com","noi_mage","15/11/2021","Habilitado"));
+        listItems.add(new Diagnostico(4,"Sara Elizabeth","Angulo", "Ingenieria", "1234567890","sara@angulo.com","noi_mage","15/11/2021","Habilitado"));
+
         return listItems;
     }
 

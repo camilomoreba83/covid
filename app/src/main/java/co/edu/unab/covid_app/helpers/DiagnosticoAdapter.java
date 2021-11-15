@@ -13,13 +13,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import co.edu.unab.covid_app.R;
-import co.edu.unab.covid_app.entities.DiagnosticoUser;
+import co.edu.unab.covid_app.entities.Diagnostico;
 
 public class DiagnosticoAdapter extends BaseAdapter {
-    private ArrayList<DiagnosticoUser> listaItems;
+    private ArrayList<Diagnostico> listaItems;
     private Context context;
 
-    public DiagnosticoAdapter(ArrayList<DiagnosticoUser> listaItems, Context context) {
+    public DiagnosticoAdapter(ArrayList<Diagnostico> listaItems, Context context) {
         this.listaItems = listaItems;
         this.context = context;
     }
@@ -41,7 +41,7 @@ public class DiagnosticoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DiagnosticoUser Item = (DiagnosticoUser) getItem(position);
+        Diagnostico Item = (Diagnostico) getItem(position);
 
         convertView = LayoutInflater.from(context).inflate(R.layout.item_diagnostico,null);
         ImageView imgUser = convertView.findViewById(R.id.imgUser);
@@ -53,7 +53,8 @@ public class DiagnosticoAdapter extends BaseAdapter {
                 .error(R.drawable.ic_avatar)
                 //.resize(20,20)
                 .into(imgUser);
-        lblName.setText(Item.getName());
+        String full_name=Item.getNombre()+" "+Item.getApellido();
+        lblName.setText(full_name);
         lblDiagnostico.setText(Item.getEstado());
 
         return convertView;
