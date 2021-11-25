@@ -49,8 +49,8 @@ public class DiagnosticoAdapter extends BaseAdapter {
         TextView lblDiagnostico = convertView.findViewById(R.id.lblDiagnostico);
 
         Picasso.get().load(Item.getImage())
-                .placeholder(R.drawable.ic_avatar)
-                .error(R.drawable.ic_avatar)
+                .placeholder(R.drawable.no_foto)
+                .error(R.drawable.no_foto)
                 //.resize(20,20)
                 .into(imgUser);
         String full_name=Item.getNombre()+" "+Item.getApellido();

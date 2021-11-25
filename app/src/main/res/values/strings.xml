@@ -30,4 +30,5 @@
     <string name="icono_redistro_diagnostico">Icono redistro diagnostico</string>
     <string name="estado_del_estudiante">Estado del estudiante</string>
     <string name="nombre_completo_estudiante">Nombre completo estudiante</string>
+    <string name="sin_diagnostico">Sin Diagnostico</string>
 </resources>

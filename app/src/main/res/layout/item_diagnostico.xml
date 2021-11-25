@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgUser"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:contentDescription="@string/imagen_de_usuario"
-        app:srcCompat="@drawable/ic_avatar"
+        app:srcCompat="@drawable/no_foto"
         tools:ignore="ImageContrastCheck" />
 
     <LinearLayout
