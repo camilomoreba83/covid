@@ -53,9 +53,9 @@ public class DiagnosticoAdapter extends BaseAdapter {
                 .error(R.drawable.ic_avatar)
                 //.resize(20,20)
                 .into(imgUser);
-        String full_name=Item.getNombre()+" "+Item.getApellido();
+        String full_name=Item.getName()+" "+Item.getSurname();
         lblName.setText(full_name);
-        lblDiagnostico.setText(Item.getEstado());
+        lblDiagnostico.setText(Item.getState());
 
         return convertView;
     }

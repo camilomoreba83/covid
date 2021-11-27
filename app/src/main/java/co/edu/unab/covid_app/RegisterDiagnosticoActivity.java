@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.FrameMetrics;
 import android.view.View;
@@ -40,6 +41,55 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
         ListView opcionespruno = findViewById(R.id.pregunta_uno);
         SparseBooleanArray valoresUno = opcionespruno.getCheckedItemPositions();
         //TO DO ACCIÓN DE REGISTRAR EN BACKEND
+        String pruno = "";
+        for(int i = 0; i < valoresUno.size(); i++) {
+            if(valoresUno.valueAt(i)) {
+            int key = valoresUno.keyAt(i);
+            boolean value = valoresUno.get(key);
+            if (value) {
+                pruno = (valoresUno.keyAt(i)==0)?"a":"b";
+            } }}
+        String prdos = "";
+        String SEPARADOR = "";
+        StringBuilder cadena= new StringBuilder();
+        for(int i = 0; i < valoresDos.size(); i++) {
+            if(valoresDos.valueAt(i)) {
+                int key = valoresDos.keyAt(i);
+                boolean value = valoresDos.get(key);
+                if (value) {
+                    cadena.append(SEPARADOR);
+                    switch (valoresDos.keyAt(i)) {
+                        case 0:
+                            prdos = "a";
+                            break;
+                        case 1:
+                            prdos = "b";
+                            break;
+                        case 2:
+                            prdos = "c";
+                            break;
+                        case 3:
+                            prdos = "d";
+                            break;
+                        case 4:
+                            prdos = "e";
+                            break;
+                        case 5:
+                            prdos = "f";
+                            break;
+                        case 6:
+                            prdos = "g";
+                            break;
+                        default:
+                            prdos = "h";
+                            break;
+                    }
+                    cadena.append(prdos);
+                    SEPARADOR = ",";
+                } }}
+
+        Log.i("respuestauno", ""+pruno);
+        Log.i("respuestados", ""+cadena);
         Toast.makeText(getApplicationContext(), valoresUno.size()+""+valoresDos.size(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
         startActivity(intent);
