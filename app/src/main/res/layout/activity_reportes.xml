@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context=".ReportesActivity">
+
+    <TextView
+        android:id="@+id/lblReporteDiario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/reporte_diario"
+        android:textAlignment="textStart"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073"
+        tools:text="Reporte Diario" />
+
+    <TextView
+        android:id="@+id/lblEstadisticas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:text="@string/estadisticas_diagnostico"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="195dp"
+        android:layout_height="3dp"
+        android:background="#3C4951"
+        android:layout_gravity="end"
+        android:duplicateParentState="false" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutGraficos"
+        android:layout_width="match_parent"
+        android:layout_height="158dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChartH"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChartNH"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pieChartSD"
+            app:layout_constraintStart_toEndOf="@+id/pieChartH"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChartSD"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txtHabilitados"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:text="@string/habilitados"
+            app:layout_constraintBottom_toTopOf="@+id/pieChartH"
+            app:layout_constraintEnd_toEndOf="@+id/pieChartH"
+            app:layout_constraintStart_toStartOf="@+id/pieChartH"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtNoHabilitados"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:text="@string/no_habilitados"
+            app:layout_constraintBottom_toTopOf="@+id/pieChartNH"
+            app:layout_constraintEnd_toEndOf="@+id/pieChartNH"
+            app:layout_constraintStart_toStartOf="@+id/pieChartNH"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtSinRegistro"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:text="@string/sin_registro"
+            app:layout_constraintBottom_toTopOf="@+id/pieChartSD"
+            app:layout_constraintEnd_toEndOf="@+id/pieChartSD"
+            app:layout_constraintStart_toStartOf="@+id/pieChartSD"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/lblListaEstudiantes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:text="@string/lista_estudiantes"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="140dp"
+        android:layout_height="3dp"
+        android:layout_gravity="end"
+        android:background="#3C4951"
+        android:layout_marginBottom="8dp"
+        android:duplicateParentState="false" />
+
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</LinearLayout>
