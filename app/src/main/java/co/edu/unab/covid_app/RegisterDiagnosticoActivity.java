@@ -1,5 +1,6 @@
 package co.edu.unab.covid_app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +13,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
+import co.edu.unab.covid_app.entities.DiagnosticoB;
+import co.edu.unab.covid_app.entities.ReportRegister;
+import co.edu.unab.covid_app.http.AbcUniversitySingleton;
+import co.edu.unab.covid_app.http.Config;
+
 public class RegisterDiagnosticoActivity extends AppCompatActivity {
+    private String token = Config.usuario.getToken();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +62,6 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
         SparseBooleanArray valoresDos = opcionesprdos.getCheckedItemPositions();
         ListView opcionespruno = findViewById(R.id.pregunta_uno);
         SparseBooleanArray valoresUno = opcionespruno.getCheckedItemPositions();
-        //TO DO ACCIÓN DE REGISTRAR EN BACKEND
         String pruno = "";
         for(int i = 0; i < valoresUno.size(); i++) {
             if(valoresUno.valueAt(i)) {
@@ -52,47 +73,73 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
         String prdos = "";
         String SEPARADOR = "";
         StringBuilder cadena= new StringBuilder();
+        String opcionesLetras[]= {"a","b","c","d","e","f","g","h"};
         for(int i = 0; i < valoresDos.size(); i++) {
             if(valoresDos.valueAt(i)) {
                 int key = valoresDos.keyAt(i);
                 boolean value = valoresDos.get(key);
                 if (value) {
                     cadena.append(SEPARADOR);
-                    switch (valoresDos.keyAt(i)) {
-                        case 0:
-                            prdos = "a";
-                            break;
-                        case 1:
-                            prdos = "b";
-                            break;
-                        case 2:
-                            prdos = "c";
-                            break;
-                        case 3:
-                            prdos = "d";
-                            break;
-                        case 4:
-                            prdos = "e";
-                            break;
-                        case 5:
-                            prdos = "f";
-                            break;
-                        case 6:
-                            prdos = "g";
-                            break;
-                        default:
-                            prdos = "h";
-                            break;
-                    }
+                    prdos = opcionesLetras[valoresDos.keyAt(i)];
                     cadena.append(prdos);
                     SEPARADOR = ",";
                 } }}
+        if(pruno == "" && prdos == ""){
+            Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
+            startActivity(intent);
+        }
+        ReportRegister report = new ReportRegister(pruno,prdos);
+        StringRequest solicitud = new StringRequest(
+                Request.Method.POST,
+                Config.URL_Report_Post,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getString("status").equals("ok")){
+                                Log.d("respuesta", "entro al if");
+                                Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-        Log.i("respuestauno", ""+pruno);
-        Log.i("respuestados", ""+cadena);
-        Toast.makeText(getApplicationContext(), valoresUno.size()+""+valoresDos.size(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
-        startActivity(intent);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> values = new HashMap<>();
+                Gson gson = new Gson();
+                String json = gson.toJson(report);
+                Log.i("VARIABLES", "getParams: "+json);
+                values.put("json",json);
+                return values;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<>();
+                headers.put("Authorization",token);
+                return headers;
+            }
+        };
+
+        AbcUniversitySingleton.getInstance(this).addQueue(solicitud);
+
+
+
     }
 
     public void cancelar(View view){

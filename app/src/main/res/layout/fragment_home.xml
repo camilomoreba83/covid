@@ -8,13 +8,14 @@
 
     <ImageView
         android:id="@+id/imageUser"
-        android:layout_width="284dp"
-        android:layout_height="271dp"
+        android:layout_width="292dp"
+        android:layout_height="226dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="56dp"
         android:contentDescription="@string/imagen_de_usuario"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/no_foto" />
@@ -62,12 +63,13 @@
 
     <ImageView
         android:id="@+id/imageEstado"
-        android:layout_width="201dp"
-        android:layout_height="147dp"
-        android:layout_marginBottom="112dp"
+        android:layout_width="180dp"
+        android:layout_height="127dp"
+        android:layout_marginBottom="192dp"
         android:contentDescription="@string/icono_redistro_diagnostico"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/checkbox"
         tools:ignore="ImageContrastCheck" />
@@ -76,11 +78,26 @@
         android:id="@+id/userEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="96dp"
         android:text="@string/estado_del_estudiante"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageEstado" />
+
+    <Button
+        android:id="@+id/btn_editar"
+        android:layout_width="151dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="2dp"
+        android:text="Editar Reporte"
+        app:layout_constraintBottom_toTopOf="@+id/userEstado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageEstado" />
 
