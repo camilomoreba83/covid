@@ -65,67 +65,71 @@ public class Registrar extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(getApplicationContext(), "Debes ingresar todos los campos", Toast.LENGTH_SHORT).show();
                 }else{
                     if (contraseñaReg.contentEquals(contraseñaReg1)){
-                        Toast.makeText(getApplicationContext(), "Registro exitoso!!!", Toast.LENGTH_SHORT).show();
-                        //id_program int(255) e id_rol int(255),
-                        //{"name":"Pedro Pablo","surname":"Perez Prieto",
-                        // "email":"pppp@email.com","nit":"12345","imageUrl":"imagen.png",
-                        // "idProgram":"1","idRol":"1","password":"123"}
-                        ///////rol
-                        String contraseña_verificada = contraseñaReg1;
-                        if (rdbEstudiante.isChecked()==true){
-                            id_rol = 1;
-                        }else if (rdbProfesor.isChecked()==true){
-                            id_rol = 2;
-                        }
-                        ////////programa
-                        id_program = comboBox.getSelectedItemPosition();
-
-                        JSONObject json=new JSONObject();
-                        try {
-                            json.put("name",nombres);
-                            json.put("surname",apellidos);
-                            json.put("email",emailReg);
-                            json.put("nit",documento);
-                            json.put("imageUrl","null");
-                            json.put("idProgram",id_program);
-                            json.put("idRol",id_rol);
-                            json.put("password",contraseña_verificada);
-                            Log.d("json= ", String.valueOf(json));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        StringRequest solicitud = new StringRequest(
-                                Request.Method.POST, Config.URL_REGISTER,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Log.d("respuesta", response);
-                                        Gson gson = new Gson();
-                                        Type tipo = new TypeToken<Usuario>(){}.getType();
-                                        Config.usuario = gson.fromJson(response, tipo);
-                                        Log.d("Usuario=", Config.usuario.toString());
-                                    }
-                                }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e("error", error.getMessage());
+                        if(comboBox.getSelectedItemPosition()!=0 && (rdbEstudiante.isChecked()||rdbProfesor.isChecked())){
+                            Toast.makeText(getApplicationContext(), "Registro exitoso!!!", Toast.LENGTH_SHORT).show();
+                            //id_program int(255) e id_rol int(255),
+                            //{"name":"Pedro Pablo","surname":"Perez Prieto",
+                            // "email":"pppp@email.com","nit":"12345","imageUrl":"imagen.png",
+                            // "idProgram":"1","idRol":"1","password":"123"}
+                            ///////rol
+                            String contraseña_verificada = contraseñaReg1;
+                            if (rdbEstudiante.isChecked()==true){
+                                id_rol = 1;
+                            }else if (rdbProfesor.isChecked()==true){
+                                id_rol = 2;
                             }
-                        }
-                        ){
-                            @Nullable
-                            @Override
-                            protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String, String> values = new HashMap<>();
-                                values.put("json", String.valueOf(json));
-                                return values;
+                            ////////programa
+                            id_program = comboBox.getSelectedItemPosition();
+
+                            JSONObject json=new JSONObject();
+                            try {
+                                json.put("name",nombres);
+                                json.put("surname",apellidos);
+                                json.put("email",emailReg);
+                                json.put("nit",documento);
+                                json.put("imageUrl","null");
+                                json.put("idProgram",id_program);
+                                json.put("idRol",id_rol);
+                                json.put("password",contraseña_verificada);
+                                Log.d("json= ", String.valueOf(json));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        };
 
-                        AbcUniversitySingleton.getInstance(getApplicationContext()).addQueue(solicitud);
+                            StringRequest solicitud = new StringRequest(
+                                    Request.Method.POST, Config.URL_REGISTER,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Log.d("respuesta", response);
+                                            Gson gson = new Gson();
+                                            Type tipo = new TypeToken<Usuario>(){}.getType();
+                                            Config.usuario = gson.fromJson(response, tipo);
+                                            Log.d("Usuario=", Config.usuario.toString());
+                                        }
+                                    }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.e("error", error.getMessage());
+                                }
+                            }
+                            ){
+                                @Nullable
+                                @Override
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String, String> values = new HashMap<>();
+                                    values.put("json", String.valueOf(json));
+                                    return values;
+                                }
+                            };
 
-                        Intent intent = new Intent(Registrar.this, MainActivity.class);
-                        startActivity(intent);
+                            AbcUniversitySingleton.getInstance(getApplicationContext()).addQueue(solicitud);
+
+                            Intent intent = new Intent(Registrar.this, MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Elige quién eres y/o programa al que perteneces", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
                         Toast.makeText(getApplicationContext(), "La contraseña no coincide", Toast.LENGTH_SHORT).show();
                     }
