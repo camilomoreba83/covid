@@ -3,8 +3,12 @@ package co.edu.unab.covid_app;
 import android.os.Bundle;
 
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import co.edu.unab.covid_app.databinding.ActivityNavegacionMenuBinding;
+import co.edu.unab.covid_app.http.Config;
 
 public class NavegacionMenuActivity extends AppCompatActivity {
 
@@ -40,6 +45,26 @@ public class NavegacionMenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navegacion_menu);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        //set datos header menu
+        View header = navigationView.getHeaderView(0);
+        ImageView imgUser = header.findViewById(R.id.img_h_user);
+        TextView lblNombre = header.findViewById(R.id.lbl_h_name);
+        TextView lblEmail = header.findViewById(R.id.lbl_h_email);
+
+        Picasso.get().load("foto")
+                .placeholder(R.drawable.no_foto)
+                .error(R.drawable.no_foto)
+                //.resize(20,20)
+                .into(imgUser);
+
+        String nombre = String.valueOf(Config.usuario.getIdentify().get("name")).replace("\"", "");
+        String apellido = String.valueOf(Config.usuario.getIdentify().get("surname")).replace("\"", "");
+        String email = String.valueOf(Config.usuario.getIdentify().get("email")).replace("\"", "");
+
+        lblNombre.setText(nombre+" "+apellido);
+        lblEmail.setText(email);
+
     }
 
     @Override

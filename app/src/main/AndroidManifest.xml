@@ -11,7 +11,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Covid_App">
+        android:theme="@style/Theme.Covid_App.NoActionBar">
         <activity
             android:name=".RegisterDiagnosticoActivity"
             android:exported="false" />
@@ -21,8 +21,7 @@
         <activity
             android:name=".NavegacionMenuActivity"
             android:exported="false"
-            android:label="@string/title_activity_navegacion_menu"
-            android:theme="@style/Theme.Covid_App.NoActionBar" />
+            android:label="@string/title_activity_navegacion_menu"/>
         <activity
             android:name=".Registrar"
             android:exported="false" />

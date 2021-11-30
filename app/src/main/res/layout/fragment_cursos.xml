@@ -27,19 +27,19 @@
 
     <SearchView
         android:id="@+id/searchCurso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="342dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/search_border"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_title_cursos" />
 
-    <ListView
-        android:id="@+id/lvCursos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cursoRecycler"
         android:layout_width="364dp"
         android:layout_height="486dp"
         android:layout_marginStart="8dp"
@@ -47,7 +47,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCurso"
-        android:clickable="true"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/searchCurso"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

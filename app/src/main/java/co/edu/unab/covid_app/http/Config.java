@@ -9,6 +9,9 @@ public class Config {
     public static final String URL_Report_Post = SERVER+"autodiagnostico";
     public static final String URL_REGISTER= SERVER+"registerUser";
     public static final String URL_LOGIN= SERVER+"loginUser";
+    public static  final String URL_PROGRAMS = SERVER+"getPrograms";
+    public static  final String URL_DIAGNOSTICOS_PROGRAM = SERVER+"getDiagnosticosByProgram/";
+
     public static Usuario usuario;
     public static DiagnosticoB Diagnostico;
 }

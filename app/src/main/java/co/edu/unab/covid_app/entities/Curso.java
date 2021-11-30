@@ -2,12 +2,15 @@ package co.edu.unab.covid_app.entities;
 
 public class Curso {
     int id;
-    String nameCurso;
+    String name_program;
     String image;
 
-    public Curso(int id, String nameCurso, String image) {
+    public Curso() {
+    }
+
+    public Curso(int id, String name_program, String image) {
         this.id = id;
-        this.nameCurso = nameCurso;
+        this.name_program = name_program;
         this.image = image;
     }
 
@@ -19,12 +22,12 @@ public class Curso {
         this.id = id;
     }
 
-    public String getNameCurso() {
-        return nameCurso;
+    public String getName_program() {
+        return name_program;
     }
 
-    public void setNameCurso(String nameCurso) {
-        this.nameCurso = nameCurso;
+    public void setName_program(String name_program) {
+        this.name_program = name_program;
     }
 
     public String getImage() {

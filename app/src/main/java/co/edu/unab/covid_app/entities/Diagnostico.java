@@ -1,30 +1,60 @@
 package co.edu.unab.covid_app.entities;
 
-public class Diagnostico {
-    private int id;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Diagnostico implements Parcelable {
+    private int id_user;
     private String name;
     private String surname;
-    private String programa;
-    private String nit;
-    private  String email;
-    private  String image;
-    private String date;
-    private  String state;
+    private String estado;
+    private String image;
+
+    protected Diagnostico(Parcel in) {
+        id_user = in.readInt();
+        name = in.readString();
+        surname = in.readString();
+        estado = in.readString();
+        image = in.readString();
+    }
+
+    public static final Creator<Diagnostico> CREATOR = new Creator<Diagnostico>() {
+        @Override
+        public Diagnostico createFromParcel(Parcel in) {
+            return new Diagnostico(in);
+        }
+
+        @Override
+        public Diagnostico[] newArray(int size) {
+            return new Diagnostico[size];
+        }
+    };
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Diagnostico(int id_user, String name, String surname, String estado, String image) {
+        this.id_user = id_user;
+        this.name = name;
+        this.surname = surname;
+        this.estado = estado;
+        this.image = image;
+    }
 
     public Diagnostico() {
     }
 
-    public Diagnostico(int id, String nombre, String apellido, String programa,
-                       String nit, String email, String image, String date, String state) {
-        this.id = id;
-        this.name = nombre;
-        this.surname = apellido;
-        this.programa = programa;
-        this.nit = nit;
-        this.email = email;
-        this.image = image;
-        this.date = date;
-        this.state = state;
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public String getName() {
@@ -43,51 +73,25 @@ public class Diagnostico {
         this.surname = surname;
     }
 
-    public String getPrograma() {
-        return programa;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setPrograma(String programa) {
-        this.programa = programa;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getNit() {
-        return nit;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id_user);
+        dest.writeString(name);
+        dest.writeString(surname);
+        dest.writeString(estado);
+        dest.writeString(image);
     }
 }

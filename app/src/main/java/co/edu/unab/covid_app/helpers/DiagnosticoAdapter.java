@@ -55,7 +55,7 @@ public class DiagnosticoAdapter extends BaseAdapter {
                 .into(imgUser);
         String full_name=Item.getName()+" "+Item.getSurname();
         lblName.setText(full_name);
-        lblDiagnostico.setText(Item.getState());
+        lblDiagnostico.setText(Item.getEstado());
 
         return convertView;
     }
