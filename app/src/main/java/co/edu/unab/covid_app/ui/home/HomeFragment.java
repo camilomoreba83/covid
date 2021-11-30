@@ -2,7 +2,6 @@ package co.edu.unab.covid_app.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +28,10 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import co.edu.unab.covid_app.R;
 import co.edu.unab.covid_app.RegisterDiagnosticoActivity;
 import co.edu.unab.covid_app.databinding.FragmentHomeBinding;
-import co.edu.unab.covid_app.entities.Diagnostico;
 import co.edu.unab.covid_app.entities.DiagnosticoB;
 import co.edu.unab.covid_app.http.AbcUniversitySingleton;
 import co.edu.unab.covid_app.http.Config;
@@ -54,7 +51,8 @@ public class HomeFragment extends Fragment {
         //queue = Volley.newRequestQueue(getActivity());
         Log.i("Token", "onCreateView: "+token);
         vista = inflater.inflate(R.layout.fragment_home,container,false);
-        if(Objects.isNull(Config.Diagnostico)) {
+        Config.Diagnostico = new DiagnosticoB();
+        if(Config.Diagnostico.getId() == 0) {
             StringRequest solicitud = new StringRequest(
                     Request.Method.GET,
                     Config.URL_Report + "1",
@@ -96,6 +94,7 @@ public class HomeFragment extends Fragment {
             AbcUniversitySingleton.getInstance(getActivity()).addQueue(solicitud);
         }else{
             Log.i("if_sentece", "onCreateView: entrooo al else");
+            Log.i("if_sentece", "onCreateView: dentro  del else"+Config.Diagnostico.getId());
             cargarVista(Config.Diagnostico);
         }
         return vista;
@@ -107,7 +106,7 @@ public class HomeFragment extends Fragment {
         ImageView imagenUser = vista.findViewById(R.id.imageUser);
         ImageView imagenEstado = vista.findViewById(R.id.imageEstado);
         Button btnRegistrarDiagnostico = vista.findViewById(R.id.btnRegistrarDiagnostico);
-        Button btnEditarReporte = vista.findViewById(R.id.btn_editar);
+        Button btnEditarReporte = vista.findViewById(R.id.btnEditarReporte);
         userName.setText(userDiagnosticoVista.getName()+" "+userDiagnosticoVista.getSurname());
         userProgram.setText(userDiagnosticoVista.getPrograma());
         switch (userDiagnosticoVista.getState()){
@@ -124,6 +123,7 @@ public class HomeFragment extends Fragment {
                 Picasso.get().load(R.drawable.cancel).into(imagenEstado);
                 btnRegistrarDiagnostico.setVisibility(View.GONE);
                 btnEditarReporte.setVisibility(View.VISIBLE);
+                btnEditarReporte.setOnClickListener(eventoClick);
                 break;
             default:
                 userEstado.setText(userDiagnosticoVista.getState());
@@ -143,8 +143,10 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(HomeFragment.this.getContext(), RegisterDiagnosticoActivity.class);
                 intent.putExtra("idUser", Config.Diagnostico.getId_user());
                 startActivity(intent);
+
             }
-            if(view.getId()==R.id.btn_editar){
+            if(view.getId()==R.id.btnEditarReporte){
+                Log.i("intent", "onClick: entro al onclick btn editar");
                 Intent intent = new Intent(HomeFragment.this.getContext(), RegisterDiagnosticoActivity.class);
                 intent.putExtra("idUser", Config.Diagnostico.getId_user());
                 intent.putExtra("editarReporte",true);

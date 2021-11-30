@@ -88,7 +88,7 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
             startActivity(intent);
         }
-        ReportRegister report = new ReportRegister(pruno,prdos);
+        ReportRegister report = new ReportRegister(pruno,cadena);
         StringRequest solicitud = new StringRequest(
                 Request.Method.POST,
                 Config.URL_Report_Post,
@@ -98,9 +98,11 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             if(obj.getString("status").equals("ok")){
+                                Config.Diagnostico = new DiagnosticoB();
                                 Log.d("respuesta", "entro al if");
                                 Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

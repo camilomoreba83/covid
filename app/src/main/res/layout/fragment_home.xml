@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageEstado" />
 
     <Button
-        android:id="@+id/btn_editar"
+        android:id="@+id/btnEditarReporte"
         android:layout_width="151dp"
         android:layout_height="59dp"
         android:layout_marginStart="100dp"
