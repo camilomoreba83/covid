@@ -11,6 +11,7 @@ public class Config {
     public static final String URL_LOGIN= SERVER+"loginUser";
     public static  final String URL_PROGRAMS = SERVER+"getPrograms";
     public static  final String URL_DIAGNOSTICOS_PROGRAM = SERVER+"getDiagnosticosByProgram/";
+    public static  final String URL_PUT_DIAGNOSTICO = SERVER+"autodiagnostico/";
 
     public static Usuario usuario;
     public static DiagnosticoB Diagnostico;

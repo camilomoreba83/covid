@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
         Log.i("Token", "onCreateView: "+token);
         vista = inflater.inflate(R.layout.fragment_home,container,false);
         Config.Diagnostico = new DiagnosticoB();
+        Log.i("ID DIAGNOSTICO", "onCreateView: "+Config.Diagnostico.getId());
         if(Config.Diagnostico.getId() == 0) {
             StringRequest solicitud = new StringRequest(
                     Request.Method.GET,
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment {
         userName.setText(userDiagnosticoVista.getName()+" "+userDiagnosticoVista.getSurname());
         userProgram.setText(userDiagnosticoVista.getPrograma());
         switch (userDiagnosticoVista.getState()){
-            case "Habilitado":
+            case "HABILITADO":
                 userEstado.setText(userDiagnosticoVista.getState());
                 Picasso.get().load(R.drawable.engineer).into(imagenUser);
                 Picasso.get().load(R.drawable.checkbox).into(imagenEstado);

@@ -10,6 +10,7 @@ import android.util.SparseBooleanArray;
 import android.view.FrameMetrics;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
         ListView opcionesprdos = findViewById(R.id.pregunta_dos);
         opcionesprdos.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         opcionesprdos.setAdapter(adapterDos);
+
     }
 
     public void register(View view) {
@@ -137,11 +139,61 @@ public class RegisterDiagnosticoActivity extends AppCompatActivity {
                 return headers;
             }
         };
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            if(extras.getBoolean("editarReporte")){
+                solicitud = new StringRequest(
+                        Request.Method.PUT,
+                        Config.URL_PUT_DIAGNOSTICO+Config.Diagnostico.getId(),
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject obj = new JSONObject(response);
+                                    if (obj.getString("status").equals("ok")) {
+                                        Config.Diagnostico = new DiagnosticoB();
+                                        Log.d("respuesta", "entro al if");
+                                        Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Intent intent = new Intent(RegisterDiagnosticoActivity.this, NavegacionMenuActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                ) {
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> values = new HashMap<>();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(report);
+                        Log.i("VARIABLES", "getParams: " + json);
+                        values.put("json", json);
+                        return values;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Authorization", token);
+                        return headers;
+                    }
+                };
+
+            }
+        }
         AbcUniversitySingleton.getInstance(this).addQueue(solicitud);
-
-
-
     }
 
     public void cancelar(View view){
