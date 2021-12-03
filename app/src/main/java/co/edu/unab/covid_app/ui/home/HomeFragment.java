@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +46,8 @@ public class HomeFragment extends Fragment {
     View vista;
     Button btnRegistrarDiagnostico;
     DiagnosticoB userDiagnostico;
+    private ProgressBar pbCarga;
+    private LinearLayout layout_home;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,15 +55,21 @@ public class HomeFragment extends Fragment {
         //queue = Volley.newRequestQueue(getActivity());
         Log.i("Token", "onCreateView: "+token);
         vista = inflater.inflate(R.layout.fragment_home,container,false);
+
+        pbCarga = vista.findViewById(R.id.pbCarga);
+        layout_home = vista.findViewById(R.id.layout_home);
+        layout_home.setVisibility(View.GONE);
         Config.Diagnostico = new DiagnosticoB();
         Log.i("ID DIAGNOSTICO", "onCreateView: "+Config.Diagnostico.getId());
         if(Config.Diagnostico.getId() == 0) {
             StringRequest solicitud = new StringRequest(
                     Request.Method.GET,
-                    Config.URL_Report + "1",
+                    Config.URL_Report + Config.usuario.getIdentify().get("sub"), //camilo
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            ProgressBar pb = vista.findViewById(R.id.pbCarga);
+                            pb.setVisibility(View.GONE);
                             try {
                                 JSONObject obj = new JSONObject(response);
 
@@ -69,6 +79,7 @@ public class HomeFragment extends Fragment {
                                 }.getType();
                                 Config.Diagnostico = gson.fromJson(String.valueOf(data), tipo);
                                 Log.d("respuesta", "" + Config.Diagnostico.getName());
+                                layout_home.setVisibility(View.VISIBLE);
                                 cargarVista(Config.Diagnostico);
 
                             } catch (JSONException e) {
@@ -98,6 +109,9 @@ public class HomeFragment extends Fragment {
             Log.i("if_sentece", "onCreateView: dentro  del else"+Config.Diagnostico.getId());
             cargarVista(Config.Diagnostico);
         }
+
+
+
         return vista;
     }
     public void cargarVista(DiagnosticoB userDiagnosticoVista){
