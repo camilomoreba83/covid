@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("error", error.getMessage());
+                        //Log.e("error", error.getMessage());
+                        Log.e("error", "error de conexión");
                     }
                 }
                 ){
