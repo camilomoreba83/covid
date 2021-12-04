@@ -1,5 +1,6 @@
 package co.edu.unab.covid_app.ui.cursos;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.edu.unab.covid_app.MainActivity;
 import co.edu.unab.covid_app.R;
 import co.edu.unab.covid_app.ReportesActivity;
 import co.edu.unab.covid_app.databinding.FragmentCursosBinding;
@@ -49,6 +52,8 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
     private RecyclerView.LayoutManager layoutManager;
     private String token;
     private View vista;
+    private ProgressBar pbCarga;
+    private ProgressDialog progressDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
         vista = inflater.inflate(R.layout.fragment_cursos,container,false);
         token = Config.usuario.getToken();
         cursoRecycler = vista.findViewById(R.id.cursoRecycler);
+        pbCarga = vista.findViewById(R.id.pbCargaCurso);
         getCursos();
 
         return vista;
@@ -74,6 +80,7 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        pbCarga.setVisibility(View.GONE);
                         try {
                             JSONObject objResponse = new JSONObject(response);
 
@@ -115,12 +122,14 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
     }
 
     private void getDiagnosticoByProgram(int idCurso){
+
         StringRequest diagnosticos = new StringRequest(
                 Request.Method.GET,
                 Config.URL_DIAGNOSTICOS_PROGRAM+idCurso,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressDialog.dismiss();
                         try {
                             JSONObject objResponse = new JSONObject(response);
 
@@ -143,6 +152,7 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         Toast.makeText(getActivity(),"Error al cargar listado de diagnosticos",Toast.LENGTH_LONG).show();
                     }
                 }
@@ -165,6 +175,7 @@ public class CursosFragment extends Fragment implements CursosAdapter.CursoAdapt
 
     @Override
     public void OnItemClicked(int id) {
+        progressDialog = ProgressDialog.show(getActivity(),"Cargando","Obteniendo información del curso...",true,false);
         getDiagnosticoByProgram(id);
         /*Intent i = new Intent(CursosFragment.this.getContext(), ReportesActivity.class);
         i.putExtra("id_curso",id);
