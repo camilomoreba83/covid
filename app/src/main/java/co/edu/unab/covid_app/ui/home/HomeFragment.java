@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
@@ -55,21 +56,20 @@ public class HomeFragment extends Fragment {
         //queue = Volley.newRequestQueue(getActivity());
         Log.i("Token", "onCreateView: "+token);
         vista = inflater.inflate(R.layout.fragment_home,container,false);
-
-        pbCarga = vista.findViewById(R.id.pbCarga);
         layout_home = vista.findViewById(R.id.layout_home);
         layout_home.setVisibility(View.GONE);
+        pbCarga = vista.findViewById(R.id.pbCarga);
+        pbCarga.setVisibility(View.VISIBLE);
+
         Config.Diagnostico = new DiagnosticoB();
         Log.i("ID DIAGNOSTICO", "onCreateView: "+Config.Diagnostico.getId());
         if(Config.Diagnostico.getId() == 0) {
             StringRequest solicitud = new StringRequest(
                     Request.Method.GET,
-                    Config.URL_Report + Config.usuario.getIdentify().get("sub"), //camilo
+                    Config.URL_Report + Config.usuario.getIdentify().get("sub"),
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            ProgressBar pb = vista.findViewById(R.id.pbCarga);
-                            pb.setVisibility(View.GONE);
                             try {
                                 JSONObject obj = new JSONObject(response);
 
@@ -78,8 +78,13 @@ public class HomeFragment extends Fragment {
                                 Type tipo = new TypeToken<DiagnosticoB>() {
                                 }.getType();
                                 Config.Diagnostico = gson.fromJson(String.valueOf(data), tipo);
-                                Log.d("respuesta", "" + Config.Diagnostico.getName());
+                                Log.d("respuesta", "" + Config.Diagnostico.getName() + Config.Diagnostico.getPrograma());
+                                //String.valueOf(Config.usuario.getIdentify().get("name"))
+                                String respuesta = (String) data.get("program");
+                                TextView userProgram = vista.findViewById(R.id.userProgram);
+                                userProgram.setText(respuesta);
                                 layout_home.setVisibility(View.VISIBLE);
+                                pbCarga.setVisibility(View.GONE);
                                 cargarVista(Config.Diagnostico);
 
                             } catch (JSONException e) {
@@ -109,21 +114,16 @@ public class HomeFragment extends Fragment {
             Log.i("if_sentece", "onCreateView: dentro  del else"+Config.Diagnostico.getId());
             cargarVista(Config.Diagnostico);
         }
-
-
-
         return vista;
     }
     public void cargarVista(DiagnosticoB userDiagnosticoVista){
         TextView userName = vista.findViewById(R.id.userName);
-        TextView userProgram = vista.findViewById(R.id.userProgram);
         TextView userEstado = vista.findViewById(R.id.userEstado);
         ImageView imagenUser = vista.findViewById(R.id.imageUser);
         ImageView imagenEstado = vista.findViewById(R.id.imageEstado);
         Button btnRegistrarDiagnostico = vista.findViewById(R.id.btnRegistrarDiagnostico);
         Button btnEditarReporte = vista.findViewById(R.id.btnEditarReporte);
         userName.setText(userDiagnosticoVista.getName()+" "+userDiagnosticoVista.getSurname());
-        userProgram.setText(userDiagnosticoVista.getPrograma());
         switch (userDiagnosticoVista.getState()){
             case "HABILITADO":
                 userEstado.setText(userDiagnosticoVista.getState());
